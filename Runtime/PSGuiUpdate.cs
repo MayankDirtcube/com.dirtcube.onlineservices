@@ -72,14 +72,14 @@ namespace OnlineService
                     GameObject.Destroy(LeaderBoardPenal.transform.GetChild(i).gameObject);
                 }
             }
-            //foreach (StructLeaderboardRow item in OnlineServiceManager.Instance.LeaderboardSystem.GetLeaderboardData())
-            //{
-            //    LeaderBoardPenal.gameObject.SetActive(true);
-            //    GameObject data = GameObject.Instantiate(LeaderboardDataObject, LeaderBoardPenal.transform);
-            //    data.transform.GetChild(0).GetComponent<Text>().text = item.postion;
-            //    data.transform.GetChild(1).GetComponent<Text>().text = item.displayName;
-            //    data.transform.GetChild(2).GetComponent<Text>().text = item.stateValue;
-            //}
+            foreach (StructLeaderboardRow item in OnlineServiceManager.Instance.LeaderboardSystem.leaderboardData)
+            {
+                LeaderBoardPenal.gameObject.SetActive(true);
+                GameObject data = GameObject.Instantiate(LeaderboardDataObject, LeaderBoardPenal.transform);
+               data.transform.GetChild(0).GetComponent<Text>().text = item.postion;
+                data.transform.GetChild(1).GetComponent<Text>().text = item.displayName;
+                data.transform.GetChild(2).GetComponent<Text>().text = item.stateValue;
+           }
         }
 
         public void SendFriendRequest()
@@ -105,8 +105,8 @@ namespace OnlineService
                 GameObject frnd;
                 string playfabId = "Test"; //info.FriendPlayFabId;
              
-                //if (!info.Tags.Contains("confirmed"))
-                //{
+                if (!info.Tags.Contains("confirmed"))
+                {
                     frnd = GameObject.Instantiate(FrindsData,FriendsListPanal.transform);
                     frnd.transform.GetChild(0).GetComponent<Text>().text = info.TitleDisplayName;
                     
@@ -123,7 +123,7 @@ namespace OnlineService
                         frnd.transform.GetChild(2).gameObject.SetActive(true);
                         frnd.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() => { OnlineServiceManager.Instance.FriendsSystem.DenyFriendRequest(playfabId); });
                     }
-                //}
+                }
             }
         }
         public void AcceptFrindRequest()

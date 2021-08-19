@@ -9,10 +9,8 @@ namespace OnlineService
     public class PlayfabLeaderboardSystem : ILeaderBoardSystem
     {
 
-        private List<StructLeaderboardRow> leaderboardData= new List<StructLeaderboardRow>();
+        public List<StructLeaderboardRow> leaderboardData= new List<StructLeaderboardRow>();
 
-       
-        
         public void LoadLeaderBoard(string leaderboardName, int startedPostion, int maxNumberOfRaws)
         {
             var request = new GetLeaderboardRequest

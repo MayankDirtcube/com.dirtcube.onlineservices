@@ -9,6 +9,6 @@ namespace OnlineService
     {
         void SaveLeaderBoard(string leaderboardName,int score);
         void LoadLeaderBoard(string leaderboardName,int startedPostion, int maxNumberOfRaws);
-        //List<StructLeaderboardRow> GetLeaderboardData();
+        List<StructLeaderboardRow> GetLeaderboardData();
     }
 }

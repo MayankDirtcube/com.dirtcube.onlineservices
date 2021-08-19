@@ -6,7 +6,7 @@ using Photon.Chat;
 using PlayFab;
 using PlayFab.ClientModels;
 using ExitGames.Client.Photon;
-//using Photon.Chat.Demo;
+using Photon.Realtime;
 using UnityEngine.UI;
 using TMPro;
 //using Doozy.Engine.UI;
@@ -37,11 +37,27 @@ namespace OnlineService
             ChannelList = temp;
             HistoryLengthToFetch = 1;
             this.chatClient = new ChatClient(this);
-            chatClient.AuthValues = new AuthenticationValues();
+            chatClient.AuthValues = new Photon.Chat.AuthenticationValues();
 
 #if PHOTON_UNITY_NETWORKING
-            //this.chatAppSettings = PhotonNetwork.PhotonServerSettings.AppSettings.GetChatSettings();
+            this.chatAppSettings = GetChatSetting(PhotonNetwork.PhotonServerSettings.AppSettings); 
+
             #endif
+        }
+
+        private ChatAppSettings GetChatSetting(AppSettings appSettings)
+        {
+            return new ChatAppSettings
+            {
+                AppIdChat = appSettings.AppIdChat,
+                AppVersion = appSettings.AppVersion,
+                FixedRegion = appSettings.IsBestRegion ? null : appSettings.FixedRegion,
+                NetworkLogging = appSettings.NetworkLogging,
+                Protocol = appSettings.Protocol,
+                EnableProtocolFallback = appSettings.EnableProtocolFallback,
+                Server = appSettings.IsDefaultNameServer ? null : appSettings.Server,
+                Port = (ushort)appSettings.Port
+            };
         }
 
         public void Service()
@@ -71,7 +87,7 @@ namespace OnlineService
         private void Connect()
         {
             
-            chatClient.AuthValues.AuthType = CustomAuthenticationType.Custom;
+            chatClient.AuthValues.AuthType = Photon.Chat.CustomAuthenticationType.Custom;
             userName =OnlineServiceManager.Instance.LoginSystem.GetPlayfabId();
             chatClient.AuthValues.AddAuthParameter("username",userName);
             chatClient.AuthValues.UserId = userName;
