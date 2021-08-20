@@ -21,9 +21,11 @@ namespace OnlineService
         {
             PlayerPrefs.DeleteAll();
             Scene scene = SceneManager.GetActiveScene();
-            LoadAssetBundleFromServer();
+            
         }
 
+
+        //Function To load scene/assetbundles from server
         public void LoadAssetBundleFromServer()
         {
             StartCoroutine(SceneLoadFromServer());
