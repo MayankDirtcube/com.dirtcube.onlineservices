@@ -72,7 +72,7 @@ namespace OnlineService
         public void LoadScene(string name)
         {
            
-            SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
+            SceneManager.LoadSceneAsync(name, LoadSceneMode.Single);
 
             Debug.Log("The scene name is--" + name);
             assetbundle.UnloadAsync(false);
