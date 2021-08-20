@@ -6,8 +6,7 @@
         "PhotonChat",
         "PhotonUnityNetworking",
         "Unity.TextMeshPro",
-        "PhotonRealtime",
-        "PhotonUnityNetworking.Demos"
+        "PhotonRealtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
