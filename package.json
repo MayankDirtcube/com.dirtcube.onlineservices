@@ -1,5 +1,5 @@
 {
-    "name": "com.dirtcube.onlineservices",
+    "name": "xyz.dirtcube.playstarz.onlineservices",
     "version": "1.2.3",
     "displayName": "Online services",
     "description": "Common package for Online Services like Login, Multiplayer & Social",
