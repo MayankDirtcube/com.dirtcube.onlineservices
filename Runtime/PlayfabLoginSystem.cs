@@ -9,13 +9,12 @@ using PlayFab;
 
 namespace OnlineService
 {
-    
-    public class PlayfabLoginSystem : ILoginSystem
+    public class PlayfabLoginSystem : ALoginSystem
     {
         string userPlayfabId;
-        public string pushToken;
+        public PlayerProfileModel PlayerProfile;
 
-        public void CreateAccountByEmail(string email, string password)
+        public override void CreateAccountByEmail(string email, string password)
         {
             var request = new RegisterPlayFabUserRequest
             {
@@ -31,7 +30,7 @@ namespace OnlineService
             Debug.Log("Account successfuly Created ");
         }
 
-        public void RegisterForPush()
+        public override void RegisterForPush()
         {
             pushToken = PlayerPrefs.GetString("Pushtoken");
 #if UNITY_ANDROID
@@ -50,21 +49,21 @@ namespace OnlineService
             Debug.Log("PlayFab: Push Registration Successful");
         }
 
-        public void GetPlayerProfile(string playfabId)
+        public override void GetPlayerProfile()
         {
             var request = new GetPlayerProfileRequest
             {
-                PlayFabId = playfabId
+                PlayFabId = PlayerId
             };
             PlayFabClientAPI.GetPlayerProfile(request, OnGetPlayerProfile, Common.OnError);
         }
         void OnGetPlayerProfile(GetPlayerProfileResult result)
         {
-            
-            
+
+            PlayerProfile = result.PlayerProfile;
         }
 
-        public void GetUserInventory()
+        public override void GetUserInventory()
         {
             var request = new GetUserInventoryRequest { };
             PlayFabClientAPI.GetUserInventory(request, OnGetUserInventory, Common.OnError);
@@ -75,7 +74,7 @@ namespace OnlineService
             //Currency.text = "VC : " + result.VirtualCurrency["PC"].ToString();
         }
 
-        public void LoginByEmail(string email, string password)
+        public override void LoginByEmail(string email, string password)
         {
             var request = new LoginWithEmailAddressRequest
             {
@@ -88,17 +87,17 @@ namespace OnlineService
         {
             Debug.Log("Login Sucessfully");
             RegisterForPush();
-            userPlayfabId = result.PlayFabId;
-            //SceneManager.LoadScene(1);
+            PlayerId = result.PlayFabId;
+            GetPlayerProfile();
         }
 
-        public void Logout()
+        public override void Logout()
         {
             PlayFabClientAPI.ForgetAllCredentials();
             Debug.Log("logout successfully");
         }
 
-        public void SaveAvatarData()
+        public override void SaveAvatarData()
         {
             var request = new UpdateUserDataRequest
             {
@@ -116,7 +115,7 @@ namespace OnlineService
             Debug.Log("avatar save online");
         }
 
-        public void LoadAvatarData()
+        public override void LoadAvatarData()
         {
             PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnLoadAvatarData, Common.OnError);
         }
@@ -125,12 +124,12 @@ namespace OnlineService
 
         }
 
-        public void LogInByFacebook()
+        public override void LogInByFacebook()
         {
             throw new System.NotImplementedException();
         }
 
-        public void LogInByGoogle()
+        public override void LogInByGoogle()
         {
             throw new System.NotImplementedException();
         }

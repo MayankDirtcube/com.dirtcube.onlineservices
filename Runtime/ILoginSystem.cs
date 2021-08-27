@@ -1,8 +1,7 @@
 namespace OnlineService {
     public interface ILoginSystem
     {
-        //functions for LogIn/Out & Register
-        void CreateAccountByEmail(string email,string password);
+        //functions for LogIn/Out & Registera
         void LoginByEmail(string email, string password);
         void LogInByFacebook();
         void LogInByGoogle();

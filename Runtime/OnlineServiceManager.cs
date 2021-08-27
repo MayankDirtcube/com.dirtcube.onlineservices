@@ -13,7 +13,7 @@ public class OnlineServiceManager :Singleton<OnlineServiceManager>
     private ServiceType Leaderboard;
 
     [HideInInspector]
-    public PlayfabLoginSystem LoginSystem;
+    public ALoginSystem LoginSystem;
     [HideInInspector]
     public PlayfabFriendsSystem FriendsSystem;
     [HideInInspector]

@@ -44,12 +44,12 @@ namespace OnlineService
         public void Login()
         {
             OnlineServiceManager.Instance.LoginSystem.LoginByEmail(email.text, password.text);
-            userNameTxt.text = OnlineServiceManager.Instance.LoginSystem.GetPlayfabId();
+            userNameTxt.text = OnlineServiceManager.Instance.LoginSystem.PlayerId;
         }
 
         public void UpdateUI()
         {
-            userNameTxt.text = OnlineServiceManager.Instance.LoginSystem.GetPlayfabId();
+            userNameTxt.text = OnlineServiceManager.Instance.LoginSystem.PlayerId;
         }
         public void RegisterByEmail()
         {

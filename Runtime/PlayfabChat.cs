@@ -88,7 +88,7 @@ namespace OnlineService
         {
             
             chatClient.AuthValues.AuthType = Photon.Chat.CustomAuthenticationType.Custom;
-            userName =OnlineServiceManager.Instance.LoginSystem.GetPlayfabId();
+            userName = OnlineServiceManager.Instance.LoginSystem.PlayerId;
             chatClient.AuthValues.AddAuthParameter("username",userName);
             chatClient.AuthValues.UserId = userName;
             this.chatClient.ConnectUsingSettings(this.chatAppSettings);

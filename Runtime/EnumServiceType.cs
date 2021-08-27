@@ -2,7 +2,8 @@ namespace OnlineService {
     public enum ServiceType
     { 
     Amozon,
-    Playfab,
-    GameSparks
+    Dirtcube,
+    GameSparks,
+    Playfab
     }
 }
