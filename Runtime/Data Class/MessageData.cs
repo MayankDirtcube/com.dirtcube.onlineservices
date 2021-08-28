@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace OnlineService
 {
-    public class MessageData
+    public struct MessageData
     {
         public string sender;
         public string message;

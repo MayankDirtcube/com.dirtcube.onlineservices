@@ -7,9 +7,6 @@ using PlayFab;
 using PlayFab.ClientModels;
 using ExitGames.Client.Photon;
 using Photon.Realtime;
-using UnityEngine.UI;
-using TMPro;
-//using Doozy.Engine.UI;
 
 namespace OnlineService
 {
@@ -19,7 +16,7 @@ namespace OnlineService
         public int HistoryLengthToFetch;
         string userName;
 
-        public string InputFieldChat;
+        public string messageToSend;
         public string ChatData;
         public string state;
 
@@ -33,8 +30,7 @@ namespace OnlineService
 
         public PlayfabChat()
         {
-            string[] temp = { "Test" };
-            ChannelList = temp;
+            ChannelList = new string[] { "test"};
             HistoryLengthToFetch = 1;
             this.chatClient = new ChatClient(this);
             chatClient.AuthValues = new Photon.Chat.AuthenticationValues();
@@ -98,10 +94,10 @@ namespace OnlineService
 
         public void OnClickSend()
         {
-            if (this.InputFieldChat != null)
+            if (this.messageToSend != null)
             {
-                this.SendChatMessage(InputFieldChat);
-                this.InputFieldChat = "";
+                this.SendChatMessage(messageToSend);
+                this.messageToSend = "";
             }
         }
 

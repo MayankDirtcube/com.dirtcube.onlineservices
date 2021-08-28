@@ -72,7 +72,7 @@ namespace OnlineService
                     GameObject.Destroy(LeaderBoardPenal.transform.GetChild(i).gameObject);
                 }
             }
-            foreach (StructLeaderboardRow item in OnlineServiceManager.Instance.LeaderboardSystem.leaderboardData)
+            foreach (LeaderboardData item in OnlineServiceManager.Instance.LeaderboardSystem.leaderboardData)
             {
                 LeaderBoardPenal.gameObject.SetActive(true);
                 GameObject data = GameObject.Instantiate(LeaderboardDataObject, LeaderBoardPenal.transform);

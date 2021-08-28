@@ -24,7 +24,7 @@ namespace OnlineService
             leaderboardData.Clear();
             foreach (var item in result.Leaderboard)
             {
-                StructLeaderboardRow record = new StructLeaderboardRow();
+                LeaderboardData record = new LeaderboardData();
                 record.postion = item.Position.ToString();
                 record.displayName = item.DisplayName.ToString();
                 record.stateValue = item.StatValue.ToString();
@@ -57,7 +57,7 @@ namespace OnlineService
             Debug.Log("Score Updated");
         }
 
-        public override List<StructLeaderboardRow> GetLeaderboardData()
+        public override List<LeaderboardData> GetLeaderboardData()
         {
             return leaderboardData;
         }

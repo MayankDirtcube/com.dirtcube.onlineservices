@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace OnlineService
 {
-    public struct StructLeaderboardRow
+    public struct LeaderboardData
     {
         public string postion;
         public string displayName;

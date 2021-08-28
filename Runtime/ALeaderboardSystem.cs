@@ -6,10 +6,10 @@ namespace OnlineService
 {
     public abstract class ALeaderboardSystem
     {
-        public List<StructLeaderboardRow> leaderboardData = new List<StructLeaderboardRow>();
+        public List<LeaderboardData> leaderboardData = new List<LeaderboardData>();
         public abstract void SaveLeaderBoard(string leaderboardName, int score);
         public abstract void LoadLeaderBoard(string leaderboardName, int startedPostion, int maxNumberOfRaws);
-        public abstract List<StructLeaderboardRow> GetLeaderboardData();
+        public abstract List<LeaderboardData> GetLeaderboardData();
     }
 }
 
