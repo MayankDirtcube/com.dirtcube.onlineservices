@@ -6,12 +6,10 @@ using UnityEngine;
 
 namespace OnlineService
 {
-    public class PlayfabLeaderboardSystem : ILeaderBoardSystem
+    public class PlayfabLeaderboardSystem : ALeaderboardSystem
     {
 
-        public List<StructLeaderboardRow> leaderboardData= new List<StructLeaderboardRow>();
-
-        public void LoadLeaderBoard(string leaderboardName, int startedPostion, int maxNumberOfRaws)
+        public override void LoadLeaderBoard(string leaderboardName, int startedPostion, int maxNumberOfRaws)
         {
             var request = new GetLeaderboardRequest
             {
@@ -38,7 +36,7 @@ namespace OnlineService
             }
         }
 
-        public void SaveLeaderBoard(string leaderboardName, int score)
+        public override void SaveLeaderBoard(string leaderboardName, int score)
         {
 
             var request = new UpdatePlayerStatisticsRequest
@@ -59,7 +57,7 @@ namespace OnlineService
             Debug.Log("Score Updated");
         }
 
-        public List<StructLeaderboardRow> GetLeaderboardData()
+        public override List<StructLeaderboardRow> GetLeaderboardData()
         {
             return leaderboardData;
         }

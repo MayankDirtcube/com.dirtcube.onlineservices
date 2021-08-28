@@ -100,22 +100,22 @@ namespace OnlineService
             }
             
           
-            foreach (FriendInfo info in OnlineServiceManager.Instance.FriendsSystem.GetFriendList())
+            foreach (FriendData info in OnlineServiceManager.Instance.FriendsSystem.GetFriendList())
             {   
                 GameObject frnd;
                 string playfabId = "Test"; //info.FriendPlayFabId;
              
-                if (!info.Tags.Contains("confirmed"))
+                if (!info.tag.Contains("confirmed"))
                 {
                     frnd = GameObject.Instantiate(FrindsData,FriendsListPanal.transform);
-                    frnd.transform.GetChild(0).GetComponent<Text>().text = info.TitleDisplayName;
+                    frnd.transform.GetChild(0).GetComponent<Text>().text = info.PlayerUsername;
                     
                     frnd.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => 
                     {
-                            SendCallNotification(info.TitleDisplayName,info.FriendPlayFabId);    
+                            SendCallNotification(info.PlayerUsername,info.PlayerId);    
                      });
                     
-                    if (info.Tags.Contains("requester"))
+                    if (info.tag.Contains("requester"))
                     {
                         frnd.transform.GetChild(3).gameObject.SetActive(false);
                         frnd.transform.GetChild(1).gameObject.SetActive(true);

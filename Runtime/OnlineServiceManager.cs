@@ -15,9 +15,9 @@ public class OnlineServiceManager :Singleton<OnlineServiceManager>
     [HideInInspector]
     public ALoginSystem LoginSystem;
     [HideInInspector]
-    public PlayfabFriendsSystem FriendsSystem;
+    public AFriendSystem FriendsSystem;
     [HideInInspector]
-    public PlayfabLeaderboardSystem LeaderboardSystem;
+    public ALeaderboardSystem LeaderboardSystem;
 
 
     private void Start()

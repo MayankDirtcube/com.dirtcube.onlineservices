@@ -23,7 +23,7 @@ namespace OnlineService
         public string ChatData;
         public string state;
 
-        string PushNotificationPopupName= "AchievementPopup";
+        //string PushNotificationPopupName= "AchievementPopup";
         List<MessageData> ListOfMessagedata = new List<MessageData>();
        // UIPopup m_popup;
         private ChatClient chatClient;

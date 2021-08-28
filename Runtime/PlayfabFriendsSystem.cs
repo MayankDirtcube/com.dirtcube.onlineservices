@@ -6,17 +6,17 @@ using UnityEngine;
 
 namespace OnlineService
 {
-    public class PlayfabFriendsSystem : IFriendsSystem
+    public class PlayfabFriendsSystem : AFriendSystem
     {
 
         private List<FriendInfo> friendsList = new List<FriendInfo>();
  
-        public void AcceptFriendRequest(string playfabId)
+        public override void AcceptFriendRequest(string playfabId)
         {
             ResponseToFriendRequest("AcceptFriendRequest", playfabId);
         }
 
-        public void DenyFriendRequest(string playfabId)
+        public override void DenyFriendRequest(string playfabId)
         {
             ResponseToFriendRequest("DenyFriendRequest", playfabId);
         }
@@ -37,7 +37,7 @@ namespace OnlineService
             Debug.Log(result.Logs);
         }
 
-        public void AddFriend(string playfabId)
+        public override void AddFriend(string playfabId)
         {
             var request = new AddFriendRequest
             {
@@ -51,7 +51,7 @@ namespace OnlineService
 
         }
 
-        public void GetFriendListfromServer()
+        public override void GetFriendListfromServer()
         {
             var request = new GetFriendsListRequest
             {
@@ -72,7 +72,7 @@ namespace OnlineService
         }
 
       
-        public void SendFriendRequest(string email)
+        public override void SendFriendRequest(string email)
         {
         //    RequestHelper request = new RequestHelper
         //    {
@@ -102,12 +102,12 @@ namespace OnlineService
         //    });
         }
 
-        public void ReciveFriendRequest()
+        public override void ReciveFriendRequest()
         {
             throw new System.NotImplementedException();
         }
 
-        public void RemoveFriend(string playfabId)
+        public override void RemoveFriend(string playfabId)
         {
             var request = new RemoveFriendRequest
             {
@@ -116,15 +116,47 @@ namespace OnlineService
             };
             PlayFabClientAPI.RemoveFriend(request, OnRemoveFriend, Common.OnError);
         }
+
         void OnRemoveFriend(RemoveFriendResult result)
         {
 
         }
 
-        public List<FriendInfo> GetFriendList()
+        public override List<FriendData> GetFriendList()
         {
-            //GetFriendListfromServer();
-            return friendsList;
+            List<FriendData> listOfFriendsData = new List<FriendData>();
+           foreach(FriendInfo info in friendsList)
+            {
+                FriendData newFriend;
+                newFriend.PlayerId = info.FriendPlayFabId;
+                newFriend.PlayerUsername = info.TitleDisplayName;
+                newFriend.tag = info.Tags[0];
+                listOfFriendsData.Add(newFriend);
+            }
+            return listOfFriendsData;
+            
+        }
+
+        public override List<string> FriendsUserName()
+        {
+            List<string> listOfFriendsUsername=new List<string>();
+
+            foreach(FriendInfo _userName in friendsList)
+            {
+                listOfFriendsUsername.Add(_userName.Username);
+            }
+            return listOfFriendsUsername;
+        }
+
+        public override List<string> GetFrinedsPlayerId()
+        {
+            List<string> listOfFriendsPlayerId = new List<string>();
+
+            foreach (FriendInfo _userName in friendsList)
+            {
+                listOfFriendsPlayerId.Add(_userName.FriendPlayFabId);
+            }
+            return listOfFriendsPlayerId;
         }
     }
 
