@@ -10,7 +10,7 @@ using Photon.Realtime;
 
 namespace OnlineService
 {
-    public class PlayfabChat : IChatClientListener
+    public class PlayfabChat : IChatClientListener,IChatSystem
     {
         public string[] ChannelList;
         public int HistoryLengthToFetch;
@@ -63,7 +63,7 @@ namespace OnlineService
         }
 
 
-        public void GetPhtonToken()
+        public void Connect()
         {
             PlayFabClientAPI.GetPhotonAuthenticationToken(new GetPhotonAuthenticationTokenRequest()
             {
@@ -73,23 +73,16 @@ namespace OnlineService
             (GetPhotonAuthenticationTokenResult result) =>
             {
                 chatClient.AuthValues.AddAuthParameter("token", result.PhotonCustomAuthenticationToken);
-                Connect();
+                //Connecting to server
+                chatClient.AuthValues.AuthType = Photon.Chat.CustomAuthenticationType.Custom;
+                userName = OnlineServiceManager.Instance.LoginSystem.PlayerId;
+                chatClient.AuthValues.AddAuthParameter("username", userName);
+                chatClient.AuthValues.UserId = userName;
+                this.chatClient.ConnectUsingSettings(this.chatAppSettings);
+                Debug.Log("Connected to photon chat");
             },
 
             Common.OnError); ; 
-        }
-
-        
-        private void Connect()
-        {
-            
-            chatClient.AuthValues.AuthType = Photon.Chat.CustomAuthenticationType.Custom;
-            userName = OnlineServiceManager.Instance.LoginSystem.PlayerId;
-            chatClient.AuthValues.AddAuthParameter("username",userName);
-            chatClient.AuthValues.UserId = userName;
-            this.chatClient.ConnectUsingSettings(this.chatAppSettings);
-            Debug.Log("Connected to photon chat");
-
         }
 
         public void OnClickSend()

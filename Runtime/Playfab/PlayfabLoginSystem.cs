@@ -14,6 +14,12 @@ namespace OnlineService
         string userPlayfabId;
         public PlayerProfileModel PlayerProfile;
 
+        public PlayfabLoginSystem(IChatSystem chatObject)
+        {
+            this.chat = chatObject;
+        }
+
+
         public override void CreateAccountByEmail(string email, string password)
         {
             var request = new RegisterPlayFabUserRequest
@@ -89,6 +95,7 @@ namespace OnlineService
             RegisterForPush();
             PlayerId = result.PlayFabId;
             GetPlayerProfile();
+            chat.Connect();
         }
 
         public override void Logout()

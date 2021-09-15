@@ -7,6 +7,7 @@ namespace OnlineService
     {
         public string PlayerId;
         public string pushToken;
+        public IChatSystem chat;
 
         //functions for LogIn/Out & Register
         public abstract void CreateAccountByEmail(string emil,string password);

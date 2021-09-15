@@ -18,6 +18,8 @@ public class OnlineServiceManager :Singleton<OnlineServiceManager>
     public AFriendSystem FriendsSystem;
     [HideInInspector]
     public ALeaderboardSystem LeaderboardSystem;
+    [HideInInspector]
+    public IChatSystem ChatSystem;
 
 
     private void Start()
@@ -25,7 +27,8 @@ public class OnlineServiceManager :Singleton<OnlineServiceManager>
             switch (Login)
             {
                 case ServiceType.Playfab:
-                    LoginSystem = new PlayfabLoginSystem();
+                    ChatSystem = new PlayfabChat();
+                    LoginSystem = new PlayfabLoginSystem(ChatSystem);
                     break;
             }
 
